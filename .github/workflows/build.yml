@@ -2,7 +2,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]  # oder dein Branch-Name
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Set up JDK 24
@@ -22,13 +22,5 @@ jobs:
         java-version: '24'
 
     - name: Build with Maven
+      working-directory: SE_Portfolio    # <--- Hier gibst du den richtigen Ordner an!
       run: mvn clean install
-
-    - name: Package Application
-      run: mvn package
-
-    - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: build-artifacts
-        path: target/*.jar
